@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lecter - Pitch Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        @media (min-width: 768px) {
+            .slide {
+                padding: 2rem;
+            }
+        }
+        .brand-text-dark { color: #073B4C; }
+        .brand-text-blue { color: #118AB2; }
+        .brand-text-green { color: #06D6A0; }
+        .brand-text-yellow { color: #FFD166; }
+        .brand-text-red { color: #EF476F; }
+
+        .brand-bg-dark { background-color: #073B4C; }
+        .brand-bg-blue { background-color: #118AB2; }
+        .brand-bg-green { background-color: #06D6A0; }
+        .brand-bg-yellow { background-color: #FFD166; }
+        .brand-bg-red { background-color: #EF476F; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            margin: 1rem auto;
+            height: 250px;
+            max-height: 250px;
+        }
+        .bar-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            height: 50vh;
+            max-height: 450px;
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            left: -1.7rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 9999px;
+            background-color: #118AB2;
+            border: 4px solid #f0f9ff;
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div id="slide1" class="slide brand-bg-dark text-white">
+        <div class="text-center">
+            <div class="mx-auto bg-white/20 rounded-3xl w-48 h-48 flex items-center justify-center mb-8">
+                <span class="text-6xl font-black">VL</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black">Virtual Lecter</h1>
+            <p class="mt-4 text-xl md:text-2xl opacity-80">Empowering India's Youth: Mental Wellness for the Next Generation.</p>
+        </div>
+    </div>
+
+    <div id="slide2" class="slide">
+        <div class="text-center w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-4">The Problem: A Generation Under Pressure</h2>
+            <p class="text-lg text-slate-600 mb-12">India's youth face a silent epidemic of academic stress. This isn't just exam nerves; it's a systemic issue with severe consequences.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold brand-text-red">Widespread Anxiety</h3>
+                        <p class="text-slate-500 mt-2">The vast majority of students identify academics as a major cause of anxiety.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="anxietyChart"></canvas>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold brand-text-yellow">Clinically Significant Stress</h3>
+                        <p class="text-slate-500 mt-2">For a significant portion, this stress reaches levels that warrant professional attention.</p>
+                    </div>
+                    <div class="flex-grow flex items-center justify-center">
+                        <p class="text-8xl font-black brand-text-blue">~33%</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div>
+                        <h3 class="text-2xl font-bold brand-text-dark">The Human Cost</h3>
+                        <p class="text-slate-500 mt-2">Tragically, academic distress is a key factor in the high rate of student suicides.</p>
+                    </div>
+                    <div class="flex-grow flex items-center justify-center">
+                        <p class="text-7xl font-black brand-text-red">>13,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide3" class="slide">
+        <div class="w-full max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">The Problem, Validated</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold brand-text-blue mb-4">Academic & Clinical Research</h3>
+                <p class="text-slate-600 mb-6">The scale of this crisis is well-documented by national-level studies:</p>
+                <ul class="space-y-4 text-slate-700">
+                    <li class="flex items-start">
+                        <span class="text-green-500 font-bold text-2xl mr-3">✔</span>
+                        <div>A landmark <a href="https://ncert.nic.in/pdf/Mental_Health_WSS_A_Survey_new.pdf" target="_blank" class="underline text-blue-600 hover:text-blue-800"><strong>NCERT survey</strong></a> found that <strong>81% of students</strong> attribute significant anxiety to their studies, exams, and results.</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 font-bold text-2xl mr-3">✔</span>
+                        <div>A study published on <a href="https://www.researchgate.net/publication/289193341_Academic_Stress_Parental_Pressure_Anxiety_and_Mental_Health_among_Indian_High_School_Students" target="_blank" class="underline text-blue-600 hover:text-blue-800"><strong>ResearchGate</strong></a> found that for nearly <strong>one-third (32.6%)</strong> of students, this stress becomes clinically significant, a condition termed "psychiatric caseness."</div>
+                    </li>
+                </ul>
+                <hr class="my-8">
+                <h3 class="text-2xl font-bold brand-text-green mb-4">Our Experiential Insight (A Slight Leverage)</h3>
+                <p class="text-slate-600">Our founder's <strong>7+ years as a design thinking educator</strong> for this exact demographic provides the crucial context behind the numbers. We've seen firsthand how "academic stress" is a complex mix of parental pressure for family image, a lack of holistic development, and a fear of failure that generic solutions cannot address. This deep, longitudinal insight allows us to build a product that is not just data-informed, but deeply empathetic and culturally resonant.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide4" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Our Team: A Multidisciplinary Foundation</h2>
+            <p class="text-lg text-slate-600 mb-12 text-center">We have the perfect blend of expertise to tackle this complex problem from every angle.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-card p-6">
+                    <h3 class="text-2xl font-bold brand-text-blue">Raj Narayanan</h3>
+                    <p class="font-semibold text-slate-500">Designer, Teacher</p>
+                    <p class="text-slate-600 mt-4">Brings 7+ years of direct experience with the target demographic, ensuring the product is engaging, user-centric, and deeply empathetic to student needs.</p>
+                </div>
+                <div class="stat-card p-6">
+                    <h3 class="text-2xl font-bold brand-text-green">DR. VP Shijith</h3>
+                    <p class="font-semibold text-slate-500">Social Scientist, Designer</p>
+                    <p class="text-slate-600 mt-4">Ensures our therapeutic content is culturally contextualized and grounded in a deep understanding of the societal pressures unique to India.</p>
+                </div>
+                <div class="stat-card p-6">
+                    <h3 class="text-2xl font-bold brand-text-yellow">Anagha P</h3>
+                    <p class="font-semibold text-slate-500">Consultant Psychologist, Entrepreneur</p>
+                    <p class="text-slate-600 mt-4">Provides the clinical credibility to ensure our content is therapeutically sound, effective, and ethically designed, while also guiding our business strategy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide5" class="slide">
+        <div class="text-center w-full max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12">Our Focus: The Youth Wellness Spectrum</h2>
+            <div class="w-full">
+                <div class="bg-blue-100 text-blue-800 p-4 rounded-t-xl font-bold text-xl">Total Youth Population (Ages 13-21)</div>
+                <div class="flex justify-center"><div class="w-0 h-0 border-l-[40px] border-l-transparent border-t-[40px] border-t-blue-100 border-r-[40px] border-r-transparent"></div></div>
+                <div class="grid grid-cols-3 gap-4 text-center mt-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold text-lg brand-text-yellow">Foundation (13-15)</h4>
+                        <p class="text-sm text-slate-600">Building resilience & social skills to handle early pressures.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow ring-4 ring-red-500">
+                        <h4 class="font-bold text-lg brand-text-red">Pressure Cooker (16-18)</h4>
+                        <p class="text-sm text-slate-600">Targeting acute exam anxiety with our MVP, the "Exam De-stressing Toolkit."</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h4 class="font-bold text-lg brand-text-blue">Transition (19-21)</h4>
+                        <p class="text-sm text-slate-600">Navigating career uncertainty and life skills for the future.</p>
+                    </div>
+                </div>
+                <div class="flex justify-center"><div class="w-0 h-0 border-l-[40px] border-l-transparent border-b-[40px] border-b-green-200 border-r-[40px] border-r-transparent"></div></div>
+                <div class="bg-green-200 text-green-800 p-4 rounded-b-xl font-bold text-xl">Initial Target: The ~33% Highest-Need Segment</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slide6" class="slide">
+        <div class="text-center w-full max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-4">The Solution: Accessible Immersive VR</h2>
+            <p class="text-lg text-slate-600 mb-12">We deliver experiential therapy using the device students already own: their smartphone. Our core focus is on <strong>content creation for exposure therapy</strong>, built on proven clinical principles.</p>
+            <div class="stat-card p-8 max-w-md mx-auto">
+                <div class="text-8xl mb-4">📱+🕶️</div>
+                <h3 class="text-2xl font-bold brand-text-green">Basic VR Mode</h3>
+                <p class="text-slate-600 mt-4">By inserting their phone into a low-cost headset holder (like Google Cardboard), users enter an immersive "digital sanctuary" for deep focus and stress reduction.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide7" class="slide">
+        <div class="w-full max-w-6xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-4">Our Method: Exposure Therapy</h2>
+            <p class="text-lg text-slate-600 mb-12">Our platform is built on one of the most effective, evidence-based techniques in psychology.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-left">
+                <h3 class="text-2xl font-bold brand-text-blue">What is Exposure Therapy?</h3>
+                <p class="mt-2 text-slate-700">It's a gold-standard psychological treatment developed to help people confront their fears. When we avoid what we're afraid of, the fear grows stronger. By facing feared situations in a safe, controlled way, the brain learns to stop seeing them as a threat.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slide8" class="slide">
+        <div class="w-full max-w-6xl text-center">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-4">The Science: Clinically Proven Efficacy</h2>
+            <p class="text-lg text-slate-600 mb-12">VR Exposure Therapy (VRET) isn't theoretical; it's a proven model with statistically significant results from numerous clinical trials.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-green mb-3">Significant Anxiety Reduction</h3>
+                    <p class="text-slate-600">A 2025 meta-analysis in <a href="https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1553290/full" target="_blank" class="underline text-blue-600 hover:text-blue-800">Frontiers in Psychiatry</a> found that VR therapy <strong>significantly improved anxiety symptoms</strong> compared to conventional methods, showing a large effect size (SMD = -0.95).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-blue mb-3">Effective for Adolescents</h3>
+                    <p class="text-slate-600">A 2024 pilot study specifically on adolescents with school anxiety found VRET led to a <strong>significant reduction in social anxiety symptoms</strong>, with a large effect size (d=0.82).</p>
+                    <p class="text-xs text-slate-400 mt-2">Source: <a href="https://www.researchgate.net/publication/385561635_Virtual_Reality_Exposure_Therapy_for_Reducing_School_Anxiety_in_Adolescents_Pilot_Study" target="_blank" class="underline">JMIR Mental Health, 2024</a></p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-yellow mb-3">Outperforms Control Groups</h3>
+                    <p class="text-slate-600">In a study on public speaking anxiety, the VRET group <strong>decreased anxiety four times more</strong> than the control group (-17% vs -4% change), demonstrating clear therapeutic impact.</p>
+                    <p class="text-xs text-slate-400 mt-2">Source: <a href="https://www.researchgate.net/publication/356640067_A_Preliminary_Study_on_the_Potential_of_Virtual_Reality_Therapy_in_Reducing_Public_Speaking_Anxiety" target="_blank" class="underline">Preliminary Study, 2021</a></p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-red mb-3">Works in a Single Session</h3>
+                    <p class="text-slate-600">Recent research shows even a single, personalized VRET session can produce <strong>measurable reductions in subjective distress and heart rate</strong> for public speaking anxiety.</p>
+                     <p class="text-xs text-slate-400 mt-2">Source: <a href="https://www.mdpi.com/2813-2084/4/2/27" target="_blank" class="underline">MDPI, 2025</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide9" class="slide">
+        <div class="text-center w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12">Why XR is the Ideal Medium</h2>
+            <p class="text-lg text-slate-600 mb-12">Virtual Reality solves the biggest challenges of traditional exposure therapy, making it more effective and accessible.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-blue">Safety</h3>
+                    <p class="text-slate-600 mt-2">Users can face their fears (like public speaking) in a 100% safe virtual space without risk of real-world embarrassment.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-green">Control</h3>
+                    <p class="text-slate-600 mt-2">We can precisely control the intensity of the experience, gradually increasing the challenge as the user builds confidence.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-yellow">Scalability</h3>
+                    <p class="text-slate-600 mt-2">We can deliver clinically-proven therapy to millions of students, overcoming the severe shortage of trained therapists in India.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-bold text-xl brand-text-red">Privacy</h3>
+                    <p class="text-slate-600 mt-2">Students can access our tool from the privacy of their own home, overcoming the powerful social stigma of seeking mental health support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide10" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Business Model: The Customer & Value</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold brand-text-blue mb-4">Customer Segments</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">The User (Student, 13-21)</h4>
+                            <p class="text-slate-600">Feels overwhelmed, seeks privacy, and needs engaging, non-stigmatizing tools.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">The Payer (Parent)</h4>
+                            <p class="text-slate-600">Worries about their child's future, feels helpless to reduce their stress, and seeks tangible solutions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold brand-text-green mb-4">Value Propositions</h3>
+                     <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">Core Service (Self-Guided)</h4>
+                            <p class="text-slate-600">A private, engaging space to de-stress, build focus, and practice real-world skills safely.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Premium Service (Therapist-Assisted)</h4>
+                            <p class="text-slate-600">A blended model where students can book sessions with our in-house therapist, who uses the XR platform as a tool to guide therapy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide11" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Business Model: The Engine</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold brand-text-yellow mb-4">Channels</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li><strong>B2C:</strong> App Stores (iOS/Android), Social Media Marketing (Instagram, YouTube).</li>
+                        <li><strong>B2B2C:</strong> Direct outreach to schools, partnerships with major coaching institutes.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold brand-text-red mb-4">Revenue Streams</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li><strong>B2C:</strong> Freemium model with monthly/annual subscriptions for self-guided content.</li>
+                        <li><strong>Premium B2C:</strong> Pay-per-session or package deals for therapist-assisted experiences.</li>
+                        <li><strong>B2B2C:</strong> Bulk annual licenses for students, value-add packages for institutions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide12" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Business Model: The Machine</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold brand-text-blue mb-3">Key Activities</h3>
+                    <ul class="list-disc list-inside text-slate-600 text-sm space-y-1">
+                        <li>Culturally-Relevant Content Creation</li>
+                        <li>Clinical Validation & Research</li>
+                        <li>Platform Development (App)</li>
+                        <li>B2B Partnership Building</li>
+                        <li>Managing a Therapist Network</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold brand-text-green mb-3">Key Resources</h3>
+                    <ul class="list-disc list-inside text-slate-600 text-sm space-y-1">
+                        <li>Multidisciplinary Founding Team</li>
+                        <li>In-house Clinical Expertise</li>
+                        <li>Proprietary Therapeutic Content</li>
+                        <li>Brand & Community Trust</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold brand-text-yellow mb-3">Key Partnerships</h3>
+                    <ul class="list-disc list-inside text-slate-600 text-sm space-y-1">
+                        <li>Clinical Psychologists & Advisors</li>
+                        <li>Educational Institutions</li>
+                        <li>Coaching Centers</li>
+                        <li>Youth Mental Health NGOs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide13" class="slide">
+        <div class="text-center w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12">Market Opportunity</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold brand-text-blue">Core Market Growth</h3>
+                    <p class="text-slate-500 mt-2">The India Mental Health Apps market is experiencing explosive growth, set to grow 10x in the next decade.</p>
+                    <div class="bar-chart-container">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-2xl font-bold brand-text-green">The "Addressable Wallet"</h3>
+                    <p class="text-slate-500 mt-2">We are not creating a new expense. We are capturing a small share of a large, existing parental budget.</p>
+                    <div class="flex-grow flex flex-col items-center justify-center space-y-4">
+                        <div class="text-6xl font-black brand-text-dark">₹16,000</div>
+                        <div class="text-slate-600">Avg. Annual Spend on After-School Education</div>
+                        <div class="text-sm text-slate-500">Our solution is positioned as a high-value, low-cost addition to this existing spend.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide14" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Competition Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                    <h3 class="text-2xl font-bold brand-text-green">Global Validation</h3>
+                    <p class="text-slate-600 mt-4">The use of XR for mental health is a proven, effective model backed by strong scientific research from institutions like <a href="https://www.nature.com/immersive/d41591-024-00032-2/index.html" target="_blank" class="underline text-blue-600 hover:text-blue-800"><strong>Nature</strong></a> and <a href="https://link.springer.com/article/10.1007/s41811-025-00237-4" target="_blank" class="underline text-blue-600 hover:text-blue-800"><strong>Springer</strong></a>.</p>
+                    <p class="text-slate-600 mt-2">Global players like <strong>XRHealth</strong> and <strong>BehaVR</strong> have validated the market, proving the viability of XR therapeutics for anxiety and stress.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
+                    <h3 class="text-2xl font-bold brand-text-blue">The Indian Landscape</h3>
+                    <p class="text-slate-600 mt-4">The Indian market is nascent and underserved, with only a handful of pioneers like <strong>Wundrsight Health</strong> beginning to explore the space.</p>
+                    <p class="text-slate-600 mt-2">This creates a significant <strong>first-mover advantage</strong> for Virtual Lecter to define and lead the youth digital wellness category with a culturally-tailored solution.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide15" class="slide">
+        <div class="w-full max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Roadmap: A Frugal, 12-Month Plan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-blue-500">
+                    <h3 class="text-2xl font-bold brand-text-blue">Phase 1 (Year 1)</h3>
+                    <p class="font-semibold mt-2">MVP & Validation</p>
+                    <ul class="list-disc list-inside mt-4 text-slate-600 space-y-2">
+                        <li>Develop & launch "Exam De-stressing Toolkit" MVP.</li>
+                        <li>Secure 2-3 <strong>pro bono</strong> clinical partnerships for testing.</li>
+                        <li>Finalize core therapeutic content with in-house team.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-green-500">
+                    <h3 class="text-2xl font-bold brand-text-green">Phase 2 (Year 2)</h3>
+                    <p class="font-semibold mt-2">Scale & Expand</p>
+                    <ul class="list-disc list-inside mt-4 text-slate-600 space-y-2">
+                        <li>Public launch on Indian App Stores.</li>
+                        <li>Begin dedicated VR (Meta Quest) dev.</li>
+                        <li>Initiate formal clinical trials.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-yellow-500">
+                    <h3 class="text-2xl font-bold brand-text-yellow">Phase 3 (Year 3)</h3>
+                    <p class="font-semibold mt-2">Dominate & Innovate</p>
+                    <ul class="list-disc list-inside mt-4 text-slate-600 space-y-2">
+                        <li>Launch on dedicated VR platforms.</li>
+                        <li>Scale B2B2C partnerships nationwide.</li>
+                        <li>Expand product portfolio for all age segments.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slide16" class="slide">
+        <div class="w-full max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold brand-text-dark mb-12 text-center">Budget & Use of Funds (12-Month Seed Round)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold brand-text-blue mb-4">Estimated 12-Month Burn</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex justify-between"><span><strong>Human Resources</strong> (Salaries & Contracts)</span> <span>₹15,90,000</span></div>
+                        <div class="flex justify-between"><span><strong>Tech & Software</strong> (Cloud, Licenses)</span> <span>₹2,00,000</span></div>
+                        <div class="flex justify-between"><span><strong>Marketing & Sales</strong> (MVP Launch)</span> <span>₹1,00,000</span></div>
+                        <div class="flex justify-between"><span><strong>Clinical Validation</strong> (Pro Bono Support)</span> <span>₹1,00,000</span></div>
+                        <div class="flex justify-between"><span><strong>Operations & Admin</strong> (Incubator Support)</span> <span>₹1,00,000</span></div>
+                        <div class="flex justify-between"><span><strong>Contingency Buffer</strong> (~20%)</span> <span>₹4,10,000</span></div>
+                        <hr class="my-2">
+                        <div class="flex justify-between font-bold"><span><strong>Total Estimated Burn</strong></span> <span>₹25,00,000</span></div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h3 class="text-2xl font-bold brand-text-green mb-4">Allocation of Funds</h3>
+                     <div class="chart-container mx-auto">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide17" class="slide brand-bg-dark text-white">
+        <div class="text-center w-full max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Summary & The Ask</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left text-lg mb-8">
+                <p>✅ <strong>Huge, Proven Need:</strong> A youth mental health crisis driven by academic pressure.</p>
+                <p>✅ <strong>Expert Founding Team:</strong> A perfect blend of clinical, social science, and design expertise.</p>
+                <p>✅ <strong>Defensible XR Moat:</strong> An experiential, evidence-based solution that apps cannot replicate.</p>
+                <p>✅ <strong>Lean, Scalable Model:</strong> A "phone-first" strategy with clear B2C and B2B2C revenue streams.</p>
+            </div>
+            <div class="mt-12 bg-white/10 p-8 rounded-2xl">
+                <h3 class="text-3xl font-bold">The Ask</h3>
+                <p class="mt-2 text-xl">We are seeking <strong>₹25 Lakhs</strong> in seed funding for a 12-month runway to launch our MVP, secure pro bono clinical partners, and validate our model.</p>
+                <p class="mt-6 font-semibold">Raj Narayanan, Founder & CEO</p>
+                <p>[Your Email] | [Your Phone Number]</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const chartColors = {
+            red: '#EF476F',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            dark: '#073B4C',
+            lightGray: '#f1f5f9'
+        };
+
+        const anxietyCtx = document.getElementById('anxietyChart').getContext('2d');
+        new Chart(anxietyCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Experience Academic Anxiety', 'Do Not'],
+                datasets: [{
+                    label: '% of Students',
+                    data: [81, 19],
+                    backgroundColor: [chartColors.red, chartColors.lightGray],
+                    borderColor: ['#ffffff'],
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: tooltipCallback.plugins.tooltip,
+                    title: {
+                        display: true,
+                        text: '81% of Students',
+                        position: 'bottom',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        color: chartColors.red,
+                        padding: {
+                            top: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        const marketCtx = document.getElementById('marketChart').getContext('2d');
+        new Chart(marketCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2024', '2035 (Projected)'],
+                datasets: [{
+                    label: 'Market Size (USD)',
+                    data: [195, 1970],
+                    backgroundColor: [chartColors.blue, chartColors.green],
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        ...tooltipCallback.plugins.tooltip,
+                        callbacks: {
+                            ...tooltipCallback.plugins.tooltip.callbacks,
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y + ' Million';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    onComplete: function() {
+                        const chartInstance = this;
+                        const ctx = chartInstance.ctx;
+                        ctx.font = Chart.helpers.toFont(14, 'bold', 'Inter');
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        
+                        this.data.datasets.forEach(function(dataset, i) {
+                            const meta = chartInstance.getDatasetMeta(i);
+                            meta.data.forEach(function(bar, index) {
+                                const data = dataset.data[index];
+                                const label = '$' + data + 'M';
+                                
+                                let yPos = bar.y - 5;
+                                let textColor = chartColors.dark;
+
+                                if (bar.y < 20) {
+                                    yPos = bar.y + 20;
+                                    textColor = 'white';
+                                }
+                                
+                                ctx.fillStyle = textColor;
+                                ctx.fillText(label, bar.x, yPos);
+                            });
+                        });
+                    }
+                }
+            }
+        });
+
+        const budgetCtx = document.getElementById('budgetChart')?.getContext('2d');
+        if (budgetCtx) {
+            new Chart(budgetCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Salaries (64%)', 'Contingency (16%)', 'Marketing (4%)', 'Tech (8%)', 'Ops & Clinical (8%)'],
+                    datasets: [{
+                        label: 'Use of Funds',
+                        data: [64, 16, 4, 8, 8],
+                        backgroundColor: [
+                            chartColors.blue,
+                            chartColors.lightGray,
+                            chartColors.green,
+                            chartColors.dark,
+                            chartColors.yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: tooltipCallback.plugins.tooltip
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
